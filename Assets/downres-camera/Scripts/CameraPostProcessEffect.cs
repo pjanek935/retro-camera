@@ -1,28 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[ExecuteInEditMode]
-public class CameraPostProcessEffect : MonoBehaviour
+namespace retro_camera
 {
-    [SerializeField] protected Material material = null;
-
-    void OnRenderImage(RenderTexture source, RenderTexture destination)
+    [ExecuteInEditMode]
+    public class CameraPostProcessEffect : MonoBehaviour
     {
-        preRenderImage(source, destination);
+        [SerializeField] protected Material material = null;
 
-        if (material != null)
+        void OnRenderImage (RenderTexture source, RenderTexture destination)
         {
-            Graphics.Blit(source, destination, material);
-        }
-        else
-        {
-            Graphics.Blit(source, destination);
-        }
-    }
+            preRenderImage (source, destination);
 
-    protected virtual void preRenderImage (RenderTexture source, RenderTexture destination)
-    {
+            if (material != null)
+            {
+                Graphics.Blit (source, destination, material);
+            }
+            else
+            {
+                Graphics.Blit (source, destination);
+            }
+        }
 
+        protected virtual void preRenderImage (RenderTexture source, RenderTexture destination) { }
     }
 }
+
+

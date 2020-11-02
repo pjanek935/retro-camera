@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{933129DB-A55D-9C28-E96C-B14AE8FAAFD6}</ProjectGuid>
+    <ProjectGuid>{D11C8855-12DF-14B3-374E-3F5CE500D010}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -63,49 +63,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\downres-camera\BlitTexToScreen.cs" />
-    <Compile Include="Assets\downres-camera\CameraPostProcessEffect.cs" />
-    <Compile Include="Assets\downres-camera\DitherPostProcessEffect.cs" />
-    <Compile Include="Assets\downres-camera\ImageProcessing.cs" />
-    <Compile Include="Assets\downres-camera\downres.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\BasicMovementAnimationsController.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\BlinkState.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\CameraFOVAnimator.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\CameraRotationController.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\CharacterControllerBase.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\CharacterControllerStateBase.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\ColliderExtensions.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\CrouchState.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\GroundState.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\HeadAnimationController.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\InAirState.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\Input Manager\BurinkeruInputManager.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\Input Manager\ControllerWrapperBase.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\Input Manager\KeyboardControllerWrapper.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\PlayerGroundState.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\PlayerInAirState.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\PlayerSlideState.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\PlayerWallRunState.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\RunState.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\SlideState.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\SpineAnimationController.cs" />
-    <Compile Include="Assets\fps-controller\Scripts\WallRunState.cs" />
-    <None Include="Assets\downres-camera\Post Process\Dither.shader" />
-    <None Include="Assets\downres-camera\Retro3D\Retro3DSpecularAmbientDiffuse.shader" />
-    <None Include="Assets\downres-camera\Post Process\BlinkShade.shader" />
-    <None Include="Assets\downres-camera\Post Process\Scan.shader" />
-    <None Include="Assets\downres-camera\Post Process\CRTDiffuse.shader" />
-    <None Include="Assets\downres-camera\Post Process\ChromaticAberration.shader" />
-    <None Include="Assets\downres-camera\Retro3D\Retro3DUnlitWithShadow.shader" />
-    <None Include="Assets\downres-camera\Retro3D\Retro3DUnlit.shader" />
-    <None Include="Assets\downres-camera\Post Process\Blur.shader" />
-    <None Include="Assets\downres-camera\Post Process\ColorInversion.shader" />
-    <None Include="Assets\downres-camera\Post Process\CombineTwoRenderTextures.shader" />
-    <None Include="Assets\downres-camera\Retro3D\Retro3DAmbientDiffuse.shader" />
-    <None Include="Assets\downres-camera\Retro3D\Retro3DDiffuse.shader" />
-    <None Include="Assets\downres-camera\Post Process\CRTDistortion.shader" />
-    <None Include="Assets\downres-camera\Retro3D\Retro3DLightResolution.shader" />
+    <Compile Include="Assets\downres-camera\Scripts\BlitTexToScreen.cs" />
+    <Compile Include="Assets\downres-camera\Scripts\CameraPostProcessEffect.cs" />
+    <Compile Include="Assets\downres-camera\Scripts\DownresCamera.cs" />
+    <Compile Include="Assets\downres-camera\Scripts\Rotate.cs" />
+    <None Include="Assets\downres-camera\Shaders\Dither.shader" />
+    <None Include="Assets\downres-camera\Shaders\Retro3DSpecularAmbientDiffuse.shader" />
+    <None Include="Assets\downres-camera\Shaders\Two Colors.shader" />
+    <None Include="Assets\downres-camera\Shaders\Split Lines.shader" />
+    <None Include="Assets\downres-camera\Shaders\Distortion.shader" />
+    <None Include="Assets\downres-camera\Shaders\Chromatic Aberration.shader" />
+    <None Include="Assets\downres-camera\Shaders\Retro3DUnlitWithShadow.shader" />
+    <None Include="Assets\downres-camera\Shaders\Retro3DUnlit.shader" />
+    <None Include="Assets\downres-camera\Shaders\Combine Two Render Textures.shader" />
+    <None Include="Assets\downres-camera\Shaders\Retro3DAmbientDiffuse.shader" />
+    <None Include="Assets\downres-camera\Shaders\Retro3DDiffuse.shader" />
+    <None Include="Assets\downres-camera\Shaders\Retro3DLightResolution.shader" />
+    <None Include="Assets\downres-camera\Shaders\Dither Two Colors.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.7f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -635,31 +609,31 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.7f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/Unity Projects/fps-controller/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>D:/Unity Projects/retro-camera/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/Unity Projects/fps-controller/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>D:/Unity Projects/retro-camera/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/Unity Projects/fps-controller/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/Unity Projects/retro-camera/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/Unity Projects/fps-controller/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/Unity Projects/retro-camera/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/Unity Projects/fps-controller/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>D:/Unity Projects/retro-camera/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/Unity Projects/fps-controller/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/Unity Projects/retro-camera/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/Unity Projects/fps-controller/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>D:/Unity Projects/retro-camera/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/Unity Projects/fps-controller/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/Unity Projects/retro-camera/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/Unity Projects/fps-controller/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/Unity Projects/retro-camera/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>

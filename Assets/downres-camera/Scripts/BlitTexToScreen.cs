@@ -1,36 +1,94 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[ExecuteInEditMode]
-public class BlitTexToScreen : MonoBehaviour
+namespace retro_camera
 {
-    [SerializeField] Material material = null;
-
-    RenderTexture backTex;
-    RenderTexture frontTex;
-
-    void OnRenderImage(RenderTexture src, RenderTexture dest)
+    [ExecuteInEditMode]
+    public class BlitTexToScreen : MonoBehaviour
     {
-        if (backTex != null && frontTex != null && material != null)
+        [SerializeField] int downscaleFactor = 0;
+        [SerializeField] Material material = null;
+        [SerializeField] DownresCamera [] cameras = new DownresCamera [2];
+
+        private int oldScreenWidth;
+        private int oldScreenHeight;
+        private int oldDownscaleFactor;
+
+        private void Start ()
         {
-            Graphics.Blit(src, dest, material);
+            refreshTargetTextures ();
+            setRenderTextures ();
         }
-        else
+
+        private void OnValidate ()
         {
-            Graphics.Blit(src, dest);
+            if (downscaleFactor < 0)
+            {
+                downscaleFactor = 0;
+            }
+
+            refreshTargetTextures ();
+            setRenderTextures ();
         }
-    }
 
-    public void SetBackTexture (RenderTexture texture)
-    {
-        backTex = texture;
-        material.SetTexture("_FrontTex", backTex);
-    }
+        void refreshTargetTextures ()
+        {
+            if (cameras != null)
+            {
+                foreach (DownresCamera c in cameras)
+                {
+                    if (c != null)
+                    {
+                        int width = Screen.width >> downscaleFactor;
+                        int height = Screen.height >> downscaleFactor;
 
-    public void SetFrontTexture (RenderTexture texture)
-    {
-        frontTex = texture;
-        material.SetTexture("_BackTex", frontTex);
+                        if (width <= 0) width = 12;
+                        if (height <= 0) height = 12;
+
+                        c.RefreshTargetTexture (width, height, 24);
+                    }
+                }
+            }
+        }
+
+        void setRenderTextures ()
+        {
+            if (material != null && cameras != null)
+            {
+                if (cameras.Length > 0 && cameras [0] != null)
+                {
+                    material.SetTexture ("_FrontTex", cameras [0].RenderTexture);
+                }
+
+                if (cameras.Length > 1 && cameras [1] != null)
+                {
+                    material.SetTexture ("_BackTex", cameras [1].RenderTexture);
+                }
+            }
+        }
+
+        void OnRenderImage (RenderTexture src, RenderTexture dest)
+        {
+            if (material != null)
+            {
+                Graphics.Blit (src, dest, material);
+            }
+            else
+            {
+                Graphics.Blit (src, dest);
+            }
+        }
+
+        void Update ()
+        {
+            if (Screen.width != oldScreenWidth || Screen.height != oldScreenHeight || oldDownscaleFactor != downscaleFactor)
+            {
+                oldScreenWidth = Screen.width;
+                oldScreenHeight = Screen.height;
+                oldDownscaleFactor = downscaleFactor;
+                refreshTargetTextures ();
+                setRenderTextures ();
+            }
+        }
     }
 }
+
