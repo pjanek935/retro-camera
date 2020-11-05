@@ -1,28 +1,30 @@
-﻿Shader "Retro3D/Unlit"
+﻿Shader "Retro Camera/Retro3D/Unlit With Shadow"
 {
 	Properties
 	{
 		_MainTex("Base", 2D) = "white" {}
 		_GeoRes("Geometric Resolution", Float) = 40
-		_RampTex("Ramp Texture", 2D) = "white" {}
 	}
 
 		SubShader
 	{
 		Pass
 		{
+			Tags { "LightMode" = "ForwardBase" }
 
 			CGPROGRAM
 
-			#include "UnityCG.cginc"
-
 			#pragma vertex vert
 			#pragma fragment frag
+			#include "UnityCG.cginc"
+			#pragma multi_compile_fwdbase
+			#include "AutoLight.cginc"
 
 			struct v2f
 			{
 				float4 pos : SV_POSITION;
 				float3 texcoord : TEXCOORD;
+				SHADOW_COORDS(1)
 			};
 
 			sampler2D _MainTex;
@@ -42,17 +44,40 @@
 				float2 uv = TRANSFORM_TEX(v.texcoord, _MainTex);
 				o.texcoord = float3(uv * sp.w, sp.w);
 
+				TRANSFER_SHADOW(o);
+
 				return o;
 			}
 
 			fixed4 frag(v2f i) : SV_Target
 			{
+				float attenuation = SHADOW_ATTENUATION(i);
 				float2 uv = i.texcoord.xy / i.texcoord.z;
-				return tex2D(_MainTex, uv);
+				return tex2D(_MainTex, uv) * attenuation;
 			}
 
 			ENDCG
 		}
 
+			Pass {
+				Name "ShadowCaster"
+				Tags { "LightMode" = "ShadowCaster" }
+
+				ZWrite On ZTest LEqual
+
+				CGPROGRAM
+				#pragma target 2.0
+
+				#pragma multi_compile_shadowcaster
+
+				#pragma vertex vertShadowCaster
+				#pragma fragment fragShadowCaster
+
+				#include "UnityStandardShadow.cginc"
+
+				ENDCG
+			}
 	}
+
+			Fallback "VertexLit"
 }

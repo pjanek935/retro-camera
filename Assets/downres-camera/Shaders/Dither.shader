@@ -1,4 +1,4 @@
-﻿Shader "PostProcess/Dither"
+﻿Shader "Retro Camera/Post Process/Dither"
 {
 	Properties
 	{

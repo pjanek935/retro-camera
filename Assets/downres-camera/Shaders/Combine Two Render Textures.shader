@@ -1,11 +1,10 @@
-﻿Shader "PostProcess/CombineTwoRenderTextures"
+﻿Shader "Retro Camera/Post Process/Combine Two Render Textures"
 {
     Properties
     {
-		_MainTex("Base (RGB)", 2D) = "white" {}
-
-		_FrontTex("Base (RGB)", 2D) = "white" {}
-		_BackTex("Base (RGB)", 2D) = "white" {}
+		_MainTex("Base (RGB)", 2D) = "black" {}
+		_FrontTex("Base (RGB)", 2D) = "black" {}
+		_BackTex("Base (RGB)", 2D) = "black" {}
     }
 
     SubShader
@@ -20,7 +19,6 @@
 			#include "UnityCG.cginc"
 
 			uniform sampler2D _MainTex;
-
 			uniform sampler2D _FrontTex;
 			uniform sampler2D _BackTex;
 
@@ -34,9 +32,9 @@
 			{
 				half4 frontColor = tex2D(_FrontTex, i.uv);
 				half4 backColor = tex2D(_BackTex, i.uv);
-				half4 output = half4 (backColor.rgb * (1.0 - frontColor.a) + frontColor.rgb, backColor.a);
+				half threshold = step(frontColor.a, 0);
 
-				return output;
+				return backColor * threshold + frontColor * (1 - threshold);
 			}
 
             ENDCG

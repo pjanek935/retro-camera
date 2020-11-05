@@ -1,6 +1,6 @@
 ﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "Retro3D/LightResoulution"
+Shader "Retro Camera/Retro3D/Light Resoulution"
 {
 	Properties
 	{
@@ -44,7 +44,6 @@ Shader "Retro3D/LightResoulution"
 				vertOutput vert(appdata_base v)
 				{
 					vertOutput o;
-
 
 					float4 wp = mul(UNITY_MATRIX_MV, v.vertex);
 					wp.xyz = floor(wp.xyz * _GeoRes) / _GeoRes;

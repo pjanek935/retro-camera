@@ -1,9 +1,10 @@
-﻿Shader "Retro3D/Diffuse"
+﻿Shader "Retro Camera/Retro3D/Diffuse"
 {
 	Properties
 	{
 		_MainTex("Base", 2D) = "white" {}
 		_GeoRes("Geometric Resolution", Float) = 40
+		_MinimumLight("Geometric Resolution", Float) = 0.5
 	}
 
 	SubShader
@@ -30,24 +31,23 @@
 			float4 _MainTex_ST;
 			float _GeoRes;
 			uniform float4 _LightColor0;
+			float _MinimumLight;
 
 			vertOutput vert(appdata_base v)
 			{
 				vertOutput o;
 
-				float3 n = normalize(mul(v.normal, unity_WorldToObject));
-				float3 l = normalize(_WorldSpaceLightPos0);
-				float NdotL = max(0.0, dot(n, l));
-				float3 color = NdotL * _LightColor0.rgb;
-
-				o.color = half4 (color, 1.0);
+				float3 n = normalize(mul(float4(v.normal, 0.0), unity_WorldToObject).xyz);
+				float3 l = normalize(_WorldSpaceLightPos0.xyz);
+				half4 color = half4 (dot(n, l) * _LightColor0.rgb, 1.0);
+				float t = step(_MinimumLight, color);
+				color = (color * t) + _MinimumLight * (1 - t);;
+				o.color = color;
 
 				float4 wp = mul(UNITY_MATRIX_MV, v.vertex);
 				wp.xyz = floor(wp.xyz * _GeoRes) / _GeoRes;
-
 				float4 sp = mul(UNITY_MATRIX_P, wp);
 				o.position = sp;
-
 				float2 uv = TRANSFORM_TEX(v.texcoord, _MainTex);
 				o.texcoord = float3(uv * sp.w, sp.w);
 
@@ -57,7 +57,7 @@
 			fixed4 frag(vertOutput vo) : SV_Target
 			{
 				float2 uv = vo.texcoord.xy / vo.texcoord.z;
-				return tex2D(_MainTex, uv)  * vo.color;
+				return tex2D(_MainTex, uv) * vo.color;
 			}
 
 			ENDCG

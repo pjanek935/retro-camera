@@ -1,4 +1,4 @@
-﻿Shader "PostProcess/Two Colors"
+﻿Shader "Retro Camera/Post Process/Two Colors"
 {
 	Properties
 	{

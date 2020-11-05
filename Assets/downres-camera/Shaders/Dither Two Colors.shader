@@ -1,4 +1,4 @@
-﻿Shader "PostProcess/Dither_Two_Colors"
+﻿Shader "Retro Camera/Post Process/Dither_Two_Colors"
 {
 	Properties
 	{

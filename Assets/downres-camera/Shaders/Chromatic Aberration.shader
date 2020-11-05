@@ -1,4 +1,4 @@
-﻿Shader "PostProcess/ChromaticAberration"
+﻿Shader "Retro Camera/Post Process/Chromatic Aberration"
 {
 	Properties
 	{
@@ -25,7 +25,6 @@
 		float4 frag(v2f_img i) : COLOR
 		{
 			float2 coords = i.uv.xy;
-
 			_AberrationOffset /= 300.0f;
 
 			//Red Channel
@@ -36,6 +35,7 @@
 			float4 blue = tex2D(_MainTex, coords.xy + _AberrationOffset);
 
 			float4 finalColor = float4(red.r, green.g, blue.b, 1.0f);
+
 			return finalColor;
 		}
 

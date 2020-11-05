@@ -1,4 +1,4 @@
-﻿Shader "PostProcess/Split Lines" 
+﻿Shader "Retro Camera/Post Process/Split Lines" 
 {
 	Properties
 	{
