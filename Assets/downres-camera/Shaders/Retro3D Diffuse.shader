@@ -4,7 +4,7 @@
 	{
 		_MainTex("Base", 2D) = "white" {}
 		_GeoRes("Geometric Resolution", Float) = 40
-		_MinimumLight("Geometric Resolution", Float) = 0.5
+		_MinimumLight("Minimum Light", Float) = 0.5
 	}
 
 	SubShader

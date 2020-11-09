@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Asphalt Material
-  m_Shader: {fileID: 4800000, guid: 797fdd07d4a2fe040b2d916b036b92fc, type: 3}
+  m_Shader: {fileID: 4800000, guid: b6daf15e690a35047aa40c5ff6c3e38a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -25,5 +25,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _GeoRes: 40
+    - _MinimumLight: 0.8
     m_Colors:
     - _TintColor: {r: 1, g: 1, b: 1, a: 1}

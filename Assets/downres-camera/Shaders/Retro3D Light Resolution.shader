@@ -6,8 +6,9 @@ Shader "Retro Camera/Retro3D/Light Resoulution"
 	{
 		_MainTex("Base", 2D) = "white" {}
 		_GeoRes("Geometric Resolution", Float) = 40
-		_AmbientColor("Ambient Color", Color) = (1, 1, 1, 1)
-		_LightRes("Light Resolution", Float) = 4
+		_TintColor("Tint Color", Color) = (1, 1, 1, 1)
+		_MinimumLight("Minimum Light", Float) = 0.5
+		_LightResoulution ("Light Resolution", int) = 4
 	}
 
 		SubShader
@@ -27,55 +28,45 @@ Shader "Retro Camera/Retro3D/Light Resoulution"
 
 				struct vertOutput
 				{
-					float4 pos : SV_POSITION;
+					float4 position : SV_POSITION;
 					float3 texcoord : TEXCOORD;
 					half4 color : COLOR;
-					float2 ScreenPos : TEXCOORD1;
-					LIGHTING_COORDS(3, 4)
 				};
 
 				sampler2D _MainTex;
 				float4 _MainTex_ST;
 				float _GeoRes;
 				uniform float4 _LightColor0;
-				float4 _AmbientColor;
-				float _LightRes;
+				float4 _TintColor;
+				float _MinimumLight;
+				int _LightResoulution;
 
 				vertOutput vert(appdata_base v)
 				{
 					vertOutput o;
 
+					float3 n = normalize(mul(float4(v.normal, 0.0), unity_WorldToObject).xyz);
+					float3 l = normalize(_WorldSpaceLightPos0.xyz);
+					half4 color = half4 (dot(n, l) * _LightColor0.rgb, 1.0) + _TintColor;
+					float t = step(_MinimumLight, color);
+					color = (color * t) + _MinimumLight * (1 - t);;
+					o.color = color;
+
 					float4 wp = mul(UNITY_MATRIX_MV, v.vertex);
 					wp.xyz = floor(wp.xyz * _GeoRes) / _GeoRes;
-
 					float4 sp = mul(UNITY_MATRIX_P, wp);
-					o.pos = sp;
-
-					float3 n = normalize(mul(v.normal, unity_WorldToObject));
-					float3 l = normalize(_WorldSpaceLightPos0);
-					float NdotL = max(0.0, dot(n, l));
-					NdotL = floor(NdotL * _LightRes) / _LightRes;
-					float3 color = NdotL * _LightColor0.rgba + _AmbientColor;
-					o.color = half4 (color, 1.0);
-
+					o.position = sp;
 					float2 uv = TRANSFORM_TEX(v.texcoord, _MainTex);
 					o.texcoord = float3(uv * sp.w, sp.w);
 
-					o.ScreenPos = ComputeScreenPos(UnityObjectToClipPos(v.vertex));
-
-					TRANSFER_VERTEX_TO_FRAGMENT(o);
 					return o;
 				}
 
 				fixed4 frag(vertOutput vo) : SV_Target
 				{
 					float2 uv = vo.texcoord.xy / vo.texcoord.z;
-					float atten = LIGHT_ATTENUATION(vo);
-					atten = floor(atten * _LightRes) / _LightRes;
-					atten = (( atten) * float4 (1,1, 1, 1));
-					
-					
-					return tex2D(_MainTex, uv)  * vo.color;
+					fixed4 color = tex2D(_MainTex, uv) * vo.color;
+					return floor(color * _LightResoulution) / _LightResoulution;
 				}
 
 				ENDCG

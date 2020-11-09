@@ -61,11 +61,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _ColorQuant: 16
+    - _ColorQuant: 24
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DitherSize: 8
-    - _DitherStrength: 0.2
+    - _DitherStrength: 0.02
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
