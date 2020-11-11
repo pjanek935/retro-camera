@@ -2,8 +2,9 @@
 {
 	Properties
 	{
-		_MainTex("Base", 2D) = "white" {}
+		_MainTex("Base", 2D) = "black" {}
 		_GeoRes("Geometric Resolution", Float) = 40
+		_TintColor("Tint", Color) = (0, 0, 0, 0)
 	}
 
 		SubShader
@@ -27,6 +28,7 @@
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 			float _GeoRes;
+			float4 _TintColor;
 
 			v2f vert(appdata_base v)
 			{
@@ -47,7 +49,7 @@
 			fixed4 frag(v2f i) : SV_Target
 			{
 				float2 uv = i.texcoord.xy / i.texcoord.z;
-				return tex2D(_MainTex, uv);
+				return tex2D(_MainTex, uv) + _TintColor;
 			}
 
 			ENDCG

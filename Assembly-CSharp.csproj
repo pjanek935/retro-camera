@@ -73,7 +73,6 @@
     <None Include="Assets\downres-camera\Shaders\Post Process\Split Lines.shader" />
     <None Include="Assets\downres-camera\Shaders\Post Process\Distortion.shader" />
     <None Include="Assets\downres-camera\Shaders\Post Process\Chromatic Aberration.shader" />
-    <None Include="Assets\downres-camera\Shaders\Retro3D Unlit With Shadow.shader" />
     <None Include="Assets\downres-camera\Shaders\Retro3D Unlit.shader" />
     <None Include="Assets\downres-camera\Shaders\Post Process\Combine Two Render Textures.shader" />
     <None Include="Assets\downres-camera\Shaders\Retro3D Ambient Diffuse.shader" />
