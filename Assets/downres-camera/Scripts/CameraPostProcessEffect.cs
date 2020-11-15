@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace retro_camera
+namespace RetroCamera
 {
     [ExecuteInEditMode]
     public class CameraPostProcessEffect : MonoBehaviour

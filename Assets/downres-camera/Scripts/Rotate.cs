@@ -1,24 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Rotate : MonoBehaviour
+namespace RetroCamera
 {
-    [SerializeField] Vector3 speed = new Vector3 (0f, 1f, 0f);
-    [SerializeField] float interval = 0.5f;
-
-    float timer = 0;
-
-    // Update is called once per frame
-    void Update()
+    public class Rotate : MonoBehaviour
     {
-        timer += Time.deltaTime;
+        [SerializeField] Vector3 speed = new Vector3 (0f, 1f, 0f);
+        [SerializeField] float interval = 0.5f;
 
-        if (timer > interval)
+        float timer = 0;
+
+        // Update is called once per frame
+        void Update ()
         {
-            transform.Rotate (speed * Time.deltaTime);
-            timer = 0f;
+            timer += Time.deltaTime;
+
+            if (timer > interval)
+            {
+                transform.Rotate (speed * Time.deltaTime);
+                timer = 0f;
+            }
+
         }
-        
     }
 }
