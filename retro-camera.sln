@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{D11C8855-12DF-14B3-374E-3F5CE500D010}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "janki.retro-camera.Runtime", "janki.retro-camera.Runtime.csproj", "{35347EC3-12DE-D702-C62A-A3B611CF1542}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D11C8855-12DF-14B3-374E-3F5CE500D010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D11C8855-12DF-14B3-374E-3F5CE500D010}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D11C8855-12DF-14B3-374E-3F5CE500D010}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D11C8855-12DF-14B3-374E-3F5CE500D010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35347EC3-12DE-D702-C62A-A3B611CF1542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35347EC3-12DE-D702-C62A-A3B611CF1542}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35347EC3-12DE-D702-C62A-A3B611CF1542}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35347EC3-12DE-D702-C62A-A3B611CF1542}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

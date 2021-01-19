@@ -1,0 +1,19 @@
+{
+  "name": "com.janki.retro-camera",
+  "version": "1.0.0",
+  "displayName": "Retro Camera",
+  "description": "This is an example package",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "dependencies": {},
+ "keywords": [
+    "shader",
+    "retro",
+    "psx"
+  ],
+  "author": {
+    "name": "Unity",
+    "email": "unity@example.com",
+    "url": "https://www.unity3d.com"
+  }
+}
